@@ -40,6 +40,7 @@ public class Goblin : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("Goblin Collision: " + collision.gameObject.name);
         GameObject otherGo = collision.gameObject;
 
         Gate g = otherGo.GetComponent<Gate>();
