@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class Goblin : MonoBehaviour
@@ -10,6 +11,7 @@ public class Goblin : MonoBehaviour
     public float swingRate = 0.3f;
     public int damageOnHit = 1;
     public int score = 5;
+    public int coin = 1;
 
     public Vector3 pos {
         get {
@@ -22,7 +24,12 @@ public class Goblin : MonoBehaviour
 
     void Update()
     {
-        Move();    
+        Move();
+
+        if (health <= 0) {
+            
+            Destroy(gameObject);
+        }    
     }
 
     public void Move() {
@@ -31,26 +38,36 @@ public class Goblin : MonoBehaviour
         pos = tempPos;
     }
 
-    // void OnCollisionEnter(Collision collision)
-    // {
-    //     GameObject otherGo = collision.gameObject;
+    void OnCollisionEnter(Collision collision)
+    {
+        GameObject otherGo = collision.gameObject;
 
-    //     Gate g = otherGo.GetComponent<Gate>();
-    //     Arrow a = otherGo.GetComponent<Arrow>();
-    //     if (g != null) {
-    //         speed = 0f;
-    //         g.Swing();
-    //     }
-    //     else if (a != null) {
-    //         health -= a.damageOnHit;
-    //         if (health <= 0) {
-    //             Destroy(gameObject);
-    //         }
-    //     }
+        Gate g = otherGo.GetComponent<Gate>();
+        //Arrow a = otherGo.GetComponent<Arrow>();
+        if (g != null) {
+            speed = 0f;
+            StartCoroutine(WaitForSeconds(swingRate, g));
+        } else
+            Debug.Log("No gate found!");
+        // else if (a != null) {
+        //     health -= a.damageOnHit;
+        //     if (health <= 0) {
+        //         Destroy(gameObject);
+        //     }
+        // }
 
-    // } 
+    } 
 
-    void Swing() {
-        
+    IEnumerator WaitForSeconds(float seconds, Gate g) {
+        while (g != null && g.health > 0) {
+            Swing(g);
+            yield return new WaitForSeconds(seconds);
+        }
     }
+
+    void Swing(Gate G) {
+        G.TakeDamage(damageOnHit);
+        return;
+    }
+
 }
