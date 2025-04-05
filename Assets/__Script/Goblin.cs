@@ -8,7 +8,7 @@ public class Goblin : MonoBehaviour
     [Header("Dynamic")]
     public float speed = 0.5f;
     public float health = 10;
-    public float swingRate = 0.3f;
+    public float swingRate = 1.2f;
     public int damageOnHit = 1;
     public int score = 5;
     public int coin = 1;
@@ -27,7 +27,7 @@ public class Goblin : MonoBehaviour
         Move();
 
         if (health <= 0) {
-            
+
             Destroy(gameObject);
         }    
     }
@@ -46,9 +46,8 @@ public class Goblin : MonoBehaviour
         //Arrow a = otherGo.GetComponent<Arrow>();
         if (g != null) {
             speed = 0f;
-            StartCoroutine(WaitForSeconds(swingRate, g));
-        } else
-            Debug.Log("No gate found!");
+            StartCoroutine(SwingRoutine(swingRate, g));
+        }
         // else if (a != null) {
         //     health -= a.damageOnHit;
         //     if (health <= 0) {
@@ -58,7 +57,7 @@ public class Goblin : MonoBehaviour
 
     } 
 
-    IEnumerator WaitForSeconds(float seconds, Gate g) {
+    IEnumerator SwingRoutine(float seconds, Gate g) {
         while (g != null && g.health > 0) {
             Swing(g);
             yield return new WaitForSeconds(seconds);
