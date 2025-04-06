@@ -26,10 +26,7 @@ public class Goblin : MonoBehaviour
     {
         Move();
 
-        if (health <= 0) {
-
-            Destroy(gameObject);
-        }    
+               
     }
 
     public void Move() {

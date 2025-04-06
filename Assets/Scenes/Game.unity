@@ -269,6 +269,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f164c980479a9c54c8bfb694f498411b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  goblinPrefab: {fileID: 8558475750527152352, guid: 94431dd9550a4de45b2653b28acd040f, type: 3}
+  goblinCampPrefab: {fileID: 983909630}
+  spawnRate: 4
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -396,11 +399,11 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1240356503}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: e43d78b8dce322c4e861a317caf02b8a, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.23999998
+      value: 0.24000001
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e43d78b8dce322c4e861a317caf02b8a, type: 3}
       propertyPath: m_LocalScale.y
@@ -408,19 +411,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e43d78b8dce322c4e861a317caf02b8a, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.23999998
+      value: 0.24000001
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e43d78b8dce322c4e861a317caf02b8a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.22000027
+      value: -13.79
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e43d78b8dce322c4e861a317caf02b8a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.26200008
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e43d78b8dce322c4e861a317caf02b8a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.5534
+      value: 0.9
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: e43d78b8dce322c4e861a317caf02b8a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -460,7 +463,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: e43d78b8dce322c4e861a317caf02b8a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1240356503}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e43d78b8dce322c4e861a317caf02b8a, type: 3}
 --- !u!4 &515421604 stripped
@@ -677,6 +683,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &983909630 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e43d78b8dce322c4e861a317caf02b8a, type: 3}
+  m_PrefabInstance: {fileID: 515421603}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1033059073
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -744,7 +755,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1240356503}
   m_Layer: 0
-  m_Name: GoblinCamp
+  m_Name: SpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -758,13 +769,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1240356502}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -14.01, y: -2.238, z: 0.3466}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0.89128363, z: 0, w: 0.45344627}
+  m_LocalPosition: {x: 2.4035106, y: 1.091667, z: 0.6166714}
+  m_LocalScale: {x: 4.1666665, y: 4.166667, z: 4.1666665}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 515421604}
-  m_Father: {fileID: 0}
+  m_Children: []
+  m_Father: {fileID: 515421604}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1580184206
 PrefabInstance:
@@ -907,4 +917,4 @@ SceneRoots:
   - {fileID: 2786552323188728617}
   - {fileID: 1033059073}
   - {fileID: 1580184206}
-  - {fileID: 1240356503}
+  - {fileID: 515421603}
