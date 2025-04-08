@@ -21,8 +21,6 @@ public class GoblinAttack : MonoBehaviour
 
         InvokeRepeating(nameof(SpawnGoblin), 0f, spawnRate);
 
-        
-
     }
 
     
