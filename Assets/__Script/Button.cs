@@ -5,15 +5,15 @@ using UnityEngine;
 
 public class Button : MonoBehaviour
 {
-    void GameStart() {
+    public void GameStart() {
         SceneManager.LoadScene(0);
     }
 
-    void ReturnToMenu(){
+    public void ReturnToMenu(){
         SceneManager.LoadScene(3);
     }
 
-    void Quit()
+    public void Quit()
     {
         
     }
