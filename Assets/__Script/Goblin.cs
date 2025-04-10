@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using UnityEngine;
 
 public class Goblin : MonoBehaviour
@@ -24,9 +23,7 @@ public class Goblin : MonoBehaviour
 
     void Update()
     {
-        Move();
-
-               
+        Move();    
     }
 
     public void Move() {
@@ -49,6 +46,7 @@ public class Goblin : MonoBehaviour
         //     health -= a.damageOnHit;
         //     if (health <= 0) {
         //         Destroy(gameObject);
+        //         GoblinDied();
         //     }
         // }
 

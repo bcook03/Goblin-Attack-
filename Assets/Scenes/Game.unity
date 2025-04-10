@@ -272,6 +272,9 @@ MonoBehaviour:
   goblinPrefab: {fileID: 8558475750527152352, guid: 94431dd9550a4de45b2653b28acd040f, type: 3}
   goblinCampPrefab: {fileID: 983909630}
   spawnRate: 4
+  maxGoblinCount: 5
+  waveCount: 1
+  maxWaveCount: 10
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
