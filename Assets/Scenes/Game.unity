@@ -269,7 +269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f164c980479a9c54c8bfb694f498411b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  goblinPrefab: {fileID: 8558475750527152352, guid: 94431dd9550a4de45b2653b28acd040f, type: 3}
+  goblinPrefab: {fileID: 7109215491944697939, guid: 89c99ae851f86fa4ba43a4a19cc70de0, type: 3}
   goblinCampPrefab: {fileID: 983909630}
   spawnRate: 4
   maxGoblinCount: 5
