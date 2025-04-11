@@ -24,7 +24,10 @@ public class GoblinAttack : MonoBehaviour
 
     void SpawnGoblin()
     {
-        if (goblinCount >= maxGoblinCount) return;
+        if (goblinCount >= maxGoblinCount) {
+           CancelInvoke(nameof(SpawnGoblin));
+           return;
+        }
         Transform spawnPoint = goblinCampPrefab.transform.Find("SpawnPoint");
         Vector3 newPosition = spawnPoint.position;
         newPosition.y = goblinPrefab.transform.position.y;
@@ -37,6 +40,9 @@ public class GoblinAttack : MonoBehaviour
     public void GoblinDied()
     {
         goblinCount--;
+        if (goblinCount <= 0) {
+            NextWave();
+        }
     }
 
     public void ResetGoblinCount()
@@ -54,6 +60,9 @@ public class GoblinAttack : MonoBehaviour
         waveCount++;
         if (waveCount > maxWaveCount) {
             SceneManager.LoadScene("Victory");
+        }
+        else {
+            Start();
         }
     }
 
