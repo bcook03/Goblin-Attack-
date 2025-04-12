@@ -21,9 +21,9 @@ public class Button : MonoBehaviour
     public void ClearGoblins(){
         Goblin[] goblins = FindObjectsByType<Goblin>(FindObjectsSortMode.None);
         foreach (Goblin goblin in goblins) {
-            Destroy(goblin.gameObject);
-            goblinAttack.GoblinDied();
+            Destroy(goblin.gameObject);    
         }
+        goblinAttack.AreGoblinsDefeated();
     }
 
     public void Quit()

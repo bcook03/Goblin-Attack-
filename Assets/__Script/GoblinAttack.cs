@@ -12,6 +12,7 @@ public class GoblinAttack : MonoBehaviour
     public GameObject goblinCampPrefab;
     public float spawnRate = 4f;  
     public float maxGoblinCount = 5;
+    public float maxGoblinSpawn = 10;
     public int waveCount = 1;
     public int maxWaveCount = 10;
 
@@ -26,25 +27,27 @@ public class GoblinAttack : MonoBehaviour
     {
         if (goblinCount >= maxGoblinCount) {
            CancelInvoke(nameof(SpawnGoblin));
+           InvokeRepeating(nameof(AreGoblinsDefeated), 1f, 1f);
            return;
         }
-        Transform spawnPoint = goblinCampPrefab.transform.Find("SpawnPoint");
-        Vector3 newPosition = spawnPoint.position;
-        newPosition.y = goblinPrefab.transform.position.y;
-        spawnPoint.position = newPosition;
+        if (goblinCount < maxGoblinSpawn){
+            Transform spawnPoint = goblinCampPrefab.transform.Find("SpawnPoint");
+            Vector3 newPosition = spawnPoint.position;
+            newPosition.y = goblinPrefab.transform.position.y;
+            spawnPoint.position = newPosition;
 
-        GameObject goblin = Instantiate(goblinPrefab, spawnPoint.position, Quaternion.Euler(0,0,0));
-        goblinCount++;
+            GameObject goblin = Instantiate(goblinPrefab, spawnPoint.position, Quaternion.Euler(0,0,0));
+            goblinCount++;
+        }
     }
     
-    public void GoblinDied()
+    public void AreGoblinsDefeated()
     {
-        goblinCount--;
-        if (goblinCount <= 0) {
+        Goblin[] goblins = FindObjectsByType<Goblin>(FindObjectsSortMode.None);
+        if (goblins.Length == 0) {
             NextWave();
         }
     }
-
     public void ResetGoblinCount()
     {
         goblinCount = 0;
@@ -62,7 +65,7 @@ public class GoblinAttack : MonoBehaviour
             SceneManager.LoadScene("Victory");
         }
         else {
-            Start();
+            InvokeRepeating(nameof(SpawnGoblin), 0f, spawnRate);
         }
     }
 
