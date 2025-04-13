@@ -55,7 +55,7 @@ public class Goblin : MonoBehaviour
     {
         GameObject otherGo = other.gameObject;
         Gate g = otherGo.GetComponent<Gate>();
-        if (g != null) {
+        if (g != null && g.health > 0) {
             animator.SetBool("isAttacking", true);
             speed = 0f;
             StartCoroutine(SwingRoutine(swingRate, g));
