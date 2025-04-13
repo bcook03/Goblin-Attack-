@@ -6,7 +6,7 @@ using UnityEngine;
 public class Button : MonoBehaviour
 {
     public void GameStart() {
-        SceneManager.LoadScene(0);
+        SceneManager.LoadScene(1);
     }
 
     public void ReturnToMenu(){
