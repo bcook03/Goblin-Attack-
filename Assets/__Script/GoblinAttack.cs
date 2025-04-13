@@ -1,7 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -36,7 +34,7 @@ public class GoblinAttack : MonoBehaviour
             newPosition.y = goblinPrefab.transform.position.y;
             spawnPoint.position = newPosition;
 
-            GameObject goblin = Instantiate(goblinPrefab, spawnPoint.position, Quaternion.Euler(0,0,0));
+            GameObject goblin = Instantiate(goblinPrefab, spawnPoint.position, Quaternion.Euler(0,90,0));
             goblinCount++;
         }
     }
@@ -69,7 +67,16 @@ public class GoblinAttack : MonoBehaviour
         }
     }
 
-    public static void GameOver() {
-        SceneManager.LoadScene("GameOver");
+    public void GameOver() {
+        Goblin[] goblins = FindObjectsByType<Goblin>(FindObjectsSortMode.None);
+        foreach (Goblin g in goblins) {
+            g.GetComponent<Animator>().SetBool("isAttacking", false);
+            g.speed = 0.5f;
+        }
+        StartCoroutine(GameOverDelay(3f));        
+    }
+
+    IEnumerator GameOverDelay(float wait) {
+        yield return new WaitForSeconds(wait);
     }
 }
