@@ -11,10 +11,12 @@ public class GoblinAttack : MonoBehaviour
     public float spawnRate = 4f;  
     public float maxGoblinCount = 5;
     public float maxGoblinSpawn = 10;
+    
+    [Header("Dynamic")]
     public int waveCount = 1;
     public int maxWaveCount = 10;
+    public int goblinSpawned = 0;
 
-    
     private int goblinCount = 0;
     void Start()
     {
@@ -25,10 +27,10 @@ public class GoblinAttack : MonoBehaviour
     {
         if (goblinCount >= maxGoblinCount) {
            CancelInvoke(nameof(SpawnGoblin));
-           InvokeRepeating(nameof(AreGoblinsDefeated), 1f, 1f);
+           InvokeRepeating(nameof(AreGoblinsDefeated), 1f, 5f);
            return;
         }
-        if (goblinCount < maxGoblinSpawn){
+        if (goblinSpawned < maxGoblinSpawn){
             Transform spawnPoint = goblinCampPrefab.transform.Find("SpawnPoint");
             Vector3 newPosition = spawnPoint.position;
             newPosition.y = goblinPrefab.transform.position.y;
@@ -36,6 +38,7 @@ public class GoblinAttack : MonoBehaviour
 
             GameObject goblin = Instantiate(goblinPrefab, spawnPoint.position, Quaternion.Euler(0,90,0));
             goblinCount++;
+            goblinSpawned++;
         }
     }
     
@@ -45,7 +48,9 @@ public class GoblinAttack : MonoBehaviour
         if (goblins.Length == 0) {
             NextWave();
         }
+        else goblinSpawned = goblins.Length;
     }
+
     public void ResetGoblinCount()
     {
         goblinCount = 0;

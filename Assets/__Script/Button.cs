@@ -10,7 +10,7 @@ public class Button : MonoBehaviour
     }
 
     public void ReturnToMenu(){
-        SceneManager.LoadScene(3);
+        SceneManager.LoadScene(0);
     }
 
     public void Quit()
