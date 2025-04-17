@@ -326,7 +326,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 0.5
   health: 1
-  swingRate: 1.2
+  swingRate: 2.4
   damageOnHit: 1
   score: 5
   coin: 1
