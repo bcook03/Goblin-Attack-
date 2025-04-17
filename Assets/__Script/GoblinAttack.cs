@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GoblinAttack : MonoBehaviour
 {
@@ -16,11 +17,23 @@ public class GoblinAttack : MonoBehaviour
     public int waveCount = 1;
     public int maxWaveCount = 10;
     public int goblinSpawned = 0;
-
+    public int coins = 0;
     private int goblinCount = 0;
     void Start()
     {
         InvokeRepeating(nameof(SpawnGoblin), 0f, spawnRate);
+    }
+
+    void Update()
+    {
+        if (coins < 10) {
+            UnityEngine.UI.Button RE = GameObject.Find("Repair").GetComponent<UnityEngine.UI.Button>();
+            RE.interactable = false;
+        }
+        else {
+            UnityEngine.UI.Button RE = GameObject.Find("Repair").GetComponent<UnityEngine.UI.Button>();
+            RE.interactable = true;
+        }    
     }
 
     void SpawnGoblin()
@@ -84,5 +97,12 @@ public class GoblinAttack : MonoBehaviour
     IEnumerator GameOverDelay(float wait) {
         yield return new WaitForSeconds(wait);
         SceneManager.LoadScene("GameOver");
+    }
+
+    public void AddCoins(int amount) {
+        coins += amount;
+        if (coins < 0) {
+            coins = 0;
+        }
     }
 }

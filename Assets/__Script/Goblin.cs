@@ -75,6 +75,8 @@ public class Goblin : MonoBehaviour
     }
 
     public void Die() {
+        GoblinAttack ga = FindFirstObjectByType<GoblinAttack>();
+        ga.AddCoins(coin);
         speed = 0f;
         animator.SetBool("isDead", true);
         Destroy(this.gameObject, 4.2f);

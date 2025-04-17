@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -35,5 +36,15 @@ public class Gate : MonoBehaviour
             Destroy(t.GetChild(0).gameObject);
             ga.GameOver();
         }
+    }
+
+    public void RepairGate() {
+        if (health < maxHealth) {
+            health += 5;
+            if (health > maxHealth) health = maxHealth;
+            hb.size = health / maxHealth;
+        }
+        GoblinAttack ga = FindFirstObjectByType<GoblinAttack>();
+        ga.AddCoins(-10);
     }
 }
