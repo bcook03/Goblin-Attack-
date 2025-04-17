@@ -78,7 +78,7 @@ public class GoblinAttack : MonoBehaviour
             g.GetComponent<Animator>().SetBool("isAttacking", false);
             g.speed = 0.5f;
         }
-        StartCoroutine(GameOverDelay(20f));        
+        StartCoroutine(GameOverDelay(10f));        
     }
 
     IEnumerator GameOverDelay(float wait) {

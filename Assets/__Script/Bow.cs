@@ -49,7 +49,6 @@ public class Bow : MonoBehaviour
             mouseDelta *= maxMagnitude;
         }   
         Vector3 arrowPos = launchPos + mouseDelta;
-        if (arrowPos.y < )
         projectile.transform.position = arrowPos; //makes it so the launch area is near the bow and arrow
 
         Transform spawnPoint = goblinCampPrefab.transform.Find("SpawnPoint");
@@ -57,11 +56,7 @@ public class Bow : MonoBehaviour
         pos.z = spawnPoint.position.z; 
         projectile.transform.position = pos;  //sets z position to what I want it to be. set in inspector
 
-        var direction = mousePos3D - launchPos; // Gets the direction fo the mouse
-        var angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg; // Gets the angle of the mouse
-        this.transform.rotation = Quaternion.Euler(new Vector3(0, 0, angle)); // Rotates the bow to the mouse position
-        projectile.transform.rotation = Quaternion.Euler(new Vector3(0,0 , angle)); // Rotates the arrow to the mouse position
-
+       
 
         if(Input.GetMouseButtonUp(0)){  //if mouse goes up
             aimingMode = false;
