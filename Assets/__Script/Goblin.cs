@@ -38,19 +38,6 @@ public class Goblin : MonoBehaviour
         pos = tempPos;
     }
 
-    void OnCollisionEnter(Collision collision)
-    {
-        GameObject otherGo = collision.gameObject;
-        Debug.Log("Goblin Collision: " + otherGo.name);
-        Gate g = otherGo.GetComponent<Gate>();
-        if (g != null) {
-            animator.SetBool("isAttacking", true);
-            speed = 0f;
-            StartCoroutine(SwingRoutine(swingRate, g));
-        }
-
-    }
-
     void OnTriggerEnter(Collider other)
     {
         GameObject otherGo = other.gameObject;

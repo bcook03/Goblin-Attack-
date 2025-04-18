@@ -1,5 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Arrow : MonoBehaviour
 {
@@ -22,10 +23,18 @@ public class Arrow : MonoBehaviour
     {
         GameObject otherGo = other.gameObject;
         Goblin g = otherGo.GetComponent<Goblin>();
+        Orc O = otherGo.GetComponent<Orc>();
         if (g != null) {
             g.health -= damageOnHit;
             if (g.health <= 0) {
                 g.Die();
+            }
+            Destroy(this.gameObject);
+        }
+        if (O != null) {
+            O.health -= damageOnHit;
+            if (O.health <= 0) {
+                O.Die();
             }
             Destroy(this.gameObject);
         }
