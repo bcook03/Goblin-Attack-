@@ -31,11 +31,8 @@ public class Arrow : MonoBehaviour
             }
             Destroy(this.gameObject);
         }
-        if (O != null) {
-            O.health -= damageOnHit;
-            if (O.health <= 0) {
-                O.Die();
-            }
+        if(O != null) {
+            O.TakeDamage(damageOnHit);
             Destroy(this.gameObject);
         }
     }

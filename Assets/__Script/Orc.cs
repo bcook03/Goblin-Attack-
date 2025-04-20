@@ -1,17 +1,21 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Orc : MonoBehaviour
 {
     [Header("Inscribed")]
     public float speed = 0.25f;
+    public GameObject healthBar;
     public float health = 10f;
+    private float maxhealth = 10f;
     public float swingRate = 2.25f;
     public int damageOnHit = 5;
     public int score = 10;
     public int coin = 2;
     private Animator animator;
+    private Scrollbar hb;
 
     public Vector3 pos {
         get {
@@ -25,6 +29,7 @@ public class Orc : MonoBehaviour
     void Start()
     {
         animator = GetComponent<Animator>();
+        hb = healthBar.GetComponent<Scrollbar>();
     }
 
     void Update()
@@ -36,6 +41,8 @@ public class Orc : MonoBehaviour
         Vector3 tempPos = pos;
         tempPos.x += speed * Time.deltaTime;
         pos = tempPos;
+        Vector3 healthParPos = this.transform.position + new Vector3(0f, 5f, 0f);
+        healthBar.transform.position = Camera.main.WorldToScreenPoint(healthParPos);
     }
 
     void OnTriggerEnter(Collider other)
@@ -43,7 +50,7 @@ public class Orc : MonoBehaviour
         GameObject otherGo = other.gameObject;
         Gate g = otherGo.GetComponent<Gate>();
         if (g != null && g.health > 0) {
-            animator.SetBool("isAttacking", true);
+            animator.SetBool("IsAttacking", true);
             speed = 0f;
             StartCoroutine(SwingRoutine(swingRate, g));
         }
@@ -62,17 +69,22 @@ public class Orc : MonoBehaviour
     }
 
     public void TakeDamage(int damageOnHit) {
+        
         health -= damageOnHit;
+        hb.size = health / maxhealth;
+
         if (health <= 0) {
-            Destroy(gameObject);
-            GoblinAttack ga = FindFirstObjectByType<GoblinAttack>();
-            ga.AddCoins(coin);
+            healthBar.SetActive(false);
+            Die();
         }
     }
 
     public void Die() {
+        GoblinAttack ga = FindFirstObjectByType<GoblinAttack>();
+        ga.AddCoins(coin);
         speed = 0f;
         animator.SetBool("isDead", true);
-        Destroy(this.gameObject, 6f);
+        StopCoroutine("SwingRoutine");
+        Destroy(this.gameObject, 5.75f);
     }
 }

@@ -66,6 +66,7 @@ public class Goblin : MonoBehaviour
         ga.AddCoins(coin);
         speed = 0f;
         animator.SetBool("isDead", true);
+        StopCoroutine("SwingRoutine");
         Destroy(this.gameObject, 4.2f);
     }
 

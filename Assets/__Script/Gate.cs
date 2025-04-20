@@ -16,7 +16,7 @@ public class Gate : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        healthBar.active = false;
+        healthBar.SetActive(false);
         health = maxHealth;
         Rigidbody rb = GetComponent<Rigidbody>();
         ga = FindFirstObjectByType<GoblinAttack>();
@@ -26,12 +26,12 @@ public class Gate : MonoBehaviour
     
     internal void TakeDamage(int damageOnHit)
     {
-        healthBar.active = true;
+        healthBar.SetActive(true);
         health -= damageOnHit;
         hb.size = (health) / maxHealth;
         
         if (health <= 0) {
-            healthBar.active = false;
+            healthBar.SetActive(false);
             Transform t = gameObject.transform;
             Destroy(t.GetChild(0).gameObject);
             ga.GameOver();

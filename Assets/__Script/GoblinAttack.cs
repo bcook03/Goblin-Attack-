@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class GoblinAttack : MonoBehaviour
 {
@@ -10,6 +11,8 @@ public class GoblinAttack : MonoBehaviour
     public GameObject goblinPrefab;
     public GameObject goblinCampPrefab;
     public GameObject orcPrefab;
+    public TextMeshProUGUI coinText;
+    public TextMeshProUGUI waveText;
     public float goblinSpawnRate = 4f;  
     public float minGoblinSpawnRate = 2f;
     public float maxGoblinCount = 5;
@@ -35,6 +38,10 @@ public class GoblinAttack : MonoBehaviour
 
     void Update()
     {
+        coinText.text = "Coins: " + coins.ToString(); // Updates the coin text
+        
+        waveText.text = "Wave: " + waveCount.ToString() + " of " + maxWaveCount.ToString(); // Updates the wave text
+
         if (coins < 10) {
             UnityEngine.UI.Button RE = GameObject.Find("Repair").GetComponent<UnityEngine.UI.Button>();
             RE.interactable = false;
@@ -115,7 +122,7 @@ public class GoblinAttack : MonoBehaviour
         }
         else {                              // Else, invokes the spawn methods
             InvokeRepeating(nameof(SpawnGoblin), 0f, goblinSpawnRate);
-            if (waveCount > 2){
+            if (waveCount > 3){
                 InvokeRepeating(nameof(SpawnOrc), 0f, orcSpawnRate);
             }
         }
@@ -129,10 +136,10 @@ public class GoblinAttack : MonoBehaviour
             g.speed = 0.5f;
         }
         foreach (Orc o in orcs) {
-            o.GetComponent<Animator>().SetBool("isAttacking", false);
+            o.GetComponent<Animator>().SetBool("IsAttacking", false);
             o.speed = 0.25f;
         }
-        StartCoroutine(GameOverDelay(5f));        
+        StartCoroutine(GameOverDelay(8f));        
     }
 
     IEnumerator GameOverDelay(float wait) { // Delays the game over scene for 5 seconds
