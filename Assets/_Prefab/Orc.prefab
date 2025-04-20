@@ -156,7 +156,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6673302821805156515}
   m_HandleRect: {fileID: 7920623598457338971}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -651,7 +651,7 @@ MonoBehaviour:
   speed: 0.25
   healthBar: {fileID: 3754482494809866281}
   health: 10
-  swingRate: 6
+  swingRate: 4.5
   damageOnHit: 5
   score: 10
   coin: 5

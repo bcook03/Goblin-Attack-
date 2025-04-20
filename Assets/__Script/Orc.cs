@@ -58,14 +58,15 @@ public class Orc : MonoBehaviour
 
     IEnumerator SwingRoutine(float seconds, Gate g) {
         while (g != null && g.health > 0) {
-            Swing(g);
+            yield return StartCoroutine(Swing(g));
             yield return new WaitForSeconds(seconds);
+            
         }
     }
 
-    void Swing(Gate G) {
+    IEnumerator Swing(Gate G) {
+        yield return new WaitForSeconds(1.40f);
         G.TakeDamage(damageOnHit);
-        return;
     }
 
     public void TakeDamage(int damageOnHit) {
@@ -85,6 +86,6 @@ public class Orc : MonoBehaviour
         speed = 0f;
         animator.SetBool("isDead", true);
         StopCoroutine("SwingRoutine");
-        Destroy(this.gameObject, 5.75f);
+        Destroy(this.gameObject, 6.25f);
     }
 }
