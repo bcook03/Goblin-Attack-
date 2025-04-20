@@ -56,7 +56,7 @@ public class GoblinAttack : MonoBehaviour
     {
         if (goblinCount >= maxGoblinCount) {
            CancelInvoke(nameof(SpawnGoblin));
-           InvokeRepeating(nameof(AreGoblinsDefeated), 1f, 5f);
+           InvokeRepeating(nameof(AreGoblinsDefeated), 1f, 3f);
            return;
         }
         if (goblinSpawned < maxGoblinSpawn){
