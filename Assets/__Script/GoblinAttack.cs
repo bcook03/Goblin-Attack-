@@ -41,15 +41,7 @@ public class GoblinAttack : MonoBehaviour
         coinText.text = "Coins: " + coins.ToString(); // Updates the coin text
         
         waveText.text = "Wave: " + waveCount.ToString() + " of " + maxWaveCount.ToString(); // Updates the wave text
-        Gate g = GameObject.Find("Gate").GetComponent<Gate>();
-        if (coins < 10 || g.health >= g.maxHealth) {
-            UnityEngine.UI.Button RE = GameObject.Find("Repair").GetComponent<UnityEngine.UI.Button>();
-            RE.interactable = false;
-        }
-        else {
-            UnityEngine.UI.Button RE = GameObject.Find("Repair").GetComponent<UnityEngine.UI.Button>();
-            RE.interactable = true;
-        }    
+        
     }
 
     void SpawnGoblin()

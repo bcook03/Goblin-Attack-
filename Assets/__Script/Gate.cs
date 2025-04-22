@@ -23,7 +23,18 @@ public class Gate : MonoBehaviour
         hb = healthBar.GetComponent<Scrollbar>();
         hb.size = health / maxHealth;
     }
-    
+    void Update()
+    {
+        if (ga.coins < 10 || health >= maxHealth) {
+            UnityEngine.UI.Button RE = GameObject.Find("Repair").GetComponent<UnityEngine.UI.Button>();
+            RE.interactable = false;
+        }
+        else {
+            UnityEngine.UI.Button RE = GameObject.Find("Repair").GetComponent<UnityEngine.UI.Button>();
+            RE.interactable = true;
+        }    
+    }
+
     internal void TakeDamage(int damageOnHit)
     {
         healthBar.SetActive(true);
