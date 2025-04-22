@@ -106,6 +106,7 @@ public class GoblinAttack : MonoBehaviour
     public void ResetGoblinCount()
     {
         goblinCount = 0;
+        orcCount = 0;
     }
 
     public void NextWave() {
