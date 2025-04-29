@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Bow : MonoBehaviour
@@ -8,10 +9,12 @@ public class Bow : MonoBehaviour
     public Vector3 launchPos;
     public bool aimingMode;
     public GameObject projectile;
+    private bool canShoot = true;
 
     [Header("Inscribed")]
     public GameObject projectilePrefab;
     public float velocityMult = 6f;
+    public float shootCooldown = 1.5f;
 
     
     void Awake()    //Gets items and saves values for reference
@@ -23,10 +26,14 @@ public class Bow : MonoBehaviour
     }
 
     void OnMouseDown(){     //on mouse down, creates object
+        if (!canShoot) return;
         aimingMode = true;
         //Transform launchPointTrans = transform.Find("Launcher");
         projectile = Instantiate(projectilePrefab) as GameObject;
         projectile.transform.position = this.transform.position;
+
+        projectile.transform.parent = this.transform;
+
         projectile.GetComponent<Rigidbody>().isKinematic = true;
         projectile.GetComponentInChildren<TrailRenderer>().enabled = false;
         
@@ -56,9 +63,13 @@ public class Bow : MonoBehaviour
         pos.z = spawnPoint.position.z; 
         projectile.transform.position = pos;  //sets z position to what I want it to be. set in inspector
 
-       
+       Vector3 direction = mouseDelta.normalized;
+       float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+       this.transform.rotation = Quaternion.Euler(angle, -110, 0);
 
         if(Input.GetMouseButtonUp(0)){  //if mouse goes up
+            projectile.transform.parent = null;
+            projectile.transform.rotation = this.transform.rotation;
             aimingMode = false;
             Rigidbody projRB = projectile.GetComponent<Rigidbody>();
             projRB.isKinematic = false;
@@ -67,7 +78,15 @@ public class Bow : MonoBehaviour
 
             projectile.GetComponentInChildren<TrailRenderer>().enabled = true;
 
+            this.transform.rotation = Quaternion.Euler(0, -110, 0);
+
             projectile = null;
+            StartCoroutine(BowDelay(shootCooldown));
         }
+    }
+    IEnumerator BowDelay(float wait) {
+        canShoot = false;
+        yield return new WaitForSeconds(wait);
+        canShoot = true;
     }
 }

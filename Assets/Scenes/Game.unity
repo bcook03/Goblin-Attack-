@@ -474,7 +474,7 @@ MonoBehaviour:
   minOrcSpawnRate: 4
   maxOrcCount: 1
   maxOrcSpawn: 5
-  waveCount: 5
+  waveCount: 1
   maxWaveCount: 10
   goblinSpawned: 0
   orcSpawned: 0
@@ -1005,7 +1005,7 @@ MonoBehaviour:
   aimingMode: 0
   projectile: {fileID: 0}
   projectilePrefab: {fileID: 6873427907267464804, guid: 0fb4d4b70d28d2548bc9cc150984797e, type: 3}
-  velocityMult: 15
+  velocityMult: 5
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0
