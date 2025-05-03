@@ -33,7 +33,7 @@ public class Bow : MonoBehaviour
         projectile.transform.position = this.transform.position;
 
         projectile.transform.parent = this.transform;
-
+        projectile.transform.position += new Vector3(0, 1.5f, 0);
         projectile.GetComponent<Rigidbody>().isKinematic = true;
         projectile.GetComponentInChildren<TrailRenderer>().enabled = false;
         
