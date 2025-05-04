@@ -10,6 +10,7 @@ public class Bow : MonoBehaviour
     public bool aimingMode;
     public GameObject projectile;
     private bool canShoot = true;
+    private Light bowLight;
 
     [Header("Inscribed")]
     public GameObject projectilePrefab;
@@ -22,6 +23,7 @@ public class Bow : MonoBehaviour
         Transform launchPointTrans = transform.Find("Launcher");
         launchPoint = launchPointTrans.gameObject;
         launchPos = launchPointTrans.position;
+        bowLight = GetComponent<Light>();
         
     }
 
@@ -33,9 +35,9 @@ public class Bow : MonoBehaviour
         projectile.transform.position = this.transform.position;
 
         projectile.transform.parent = this.transform;
-        projectile.transform.position += new Vector3(0, 1.5f, 0);
         projectile.GetComponent<Rigidbody>().isKinematic = true;
         projectile.GetComponentInChildren<TrailRenderer>().enabled = false;
+        bowLight.enabled = false;
         
     }
 
@@ -69,7 +71,7 @@ public class Bow : MonoBehaviour
 
         if(Input.GetMouseButtonUp(0)){  //if mouse goes up
             projectile.transform.parent = null;
-            projectile.transform.rotation = this.transform.rotation;
+            
             aimingMode = false;
             Rigidbody projRB = projectile.GetComponent<Rigidbody>();
             projRB.isKinematic = false;
@@ -82,11 +84,13 @@ public class Bow : MonoBehaviour
 
             projectile = null;
             StartCoroutine(BowDelay(shootCooldown));
+            
         }
     }
     IEnumerator BowDelay(float wait) {
         canShoot = false;
         yield return new WaitForSeconds(wait);
         canShoot = true;
+        bowLight.enabled = true;
     }
 }

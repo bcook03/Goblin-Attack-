@@ -73,3 +73,4 @@ crashlytics-build.properties
 .vscode/settings.json
 connectwebgl.zip
 *.zip
+.vscode/settings.json
